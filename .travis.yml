@@ -8,5 +8,5 @@ services:
 go:
   - 1.5.1
 
-script: go test -v ./...
+script: cd discount-go; go test -v ./...
 
