@@ -8,5 +8,10 @@ services:
 go:
   - 1.5.1
 
-script: cd discount-go; go test -v ./...
-
+script:
+  - cd discount-go
+  - make test
+  - make build
+  - make docker
+  - cd ..
+  

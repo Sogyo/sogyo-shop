@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"strings"
+	"log"
 )
 
 type Discount struct {
@@ -29,6 +30,8 @@ func MakeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.Handl
 func DiscountHandler(response http.ResponseWriter, request *http.Request, uuid string) {
 	response.Header().Set("X-Server-Language", "go")
 	response.Header().Set("Content-Type", "application/json")
+
+	log.Println("/discount/ is hit.")
 
 	result := Discount{
 		Percentage: CalculateDiscountPercentage(strings.ToLower(uuid)),
