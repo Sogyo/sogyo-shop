@@ -24,5 +24,11 @@ public class CustomerModule extends AbstractModule {
     }
     return null;
   }
+
+  @Provides
+  @Named("version")
+  public String provideVersion(CustomerConfig configuration) {
+    return configuration.getVersion();
+  }
 }
 

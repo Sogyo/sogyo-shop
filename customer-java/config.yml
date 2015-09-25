@@ -10,3 +10,4 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+    

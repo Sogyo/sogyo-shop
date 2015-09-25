@@ -2,9 +2,9 @@ package nl.sogyo.sogyoshop.customer;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.setup.Bootstrap;
-import nl.sogyo.sogyoshop.customer.resources.CustomerService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
+import nl.sogyo.sogyoshop.customer.checks.CustomerCheck;
 
 public class CustomerApp extends Application<CustomerConfig> {
 
@@ -24,6 +24,7 @@ public class CustomerApp extends Application<CustomerConfig> {
 
     guiceBundle = GuiceBundle.<CustomerConfig>newBuilder()
         .addModule(new CustomerModule())
+        .enableAutoConfig(getClass().getPackage().getName())
         .setConfigClass(CustomerConfig.class)
         .build();
 
@@ -32,9 +33,6 @@ public class CustomerApp extends Application<CustomerConfig> {
 
   @Override
   public void run(CustomerConfig config, Environment env) {
-    final CustomerService customerService = new CustomerService();
-    env.jersey().register(customerService);
-
     final CustomerCheck healthCheck = new CustomerCheck(config.getVersion());
     env.healthChecks().register("template", healthCheck);
     env.jersey().register(healthCheck);

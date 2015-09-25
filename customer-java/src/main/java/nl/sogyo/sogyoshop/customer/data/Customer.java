@@ -2,6 +2,7 @@ package nl.sogyo.sogyoshop.customer.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Customer {
@@ -43,5 +44,17 @@ public class Customer {
   @JsonProperty
   public String getEmail() {
     return email;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof Customer)) {
+      return false;
+    }
+    Customer other = (Customer)o;
+    return this.uuid.equals(other.uuid);
   }
 }

@@ -5,6 +5,7 @@ import com.codahale.metrics.annotation.Timed;
 import nl.sogyo.sogyoshop.customer.persistence.CustomerRepository;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,10 +18,11 @@ public class CustomerService {
 
   private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(CustomerService.class);
 
-  @Inject
   private CustomerRepository repository;
 
-  public CustomerService() {
+  @Inject
+  public CustomerService(@Named("CustomerRepository") CustomerRepository repository) {
+    this.repository = repository;
   }
 
   @GET
