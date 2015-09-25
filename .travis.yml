@@ -9,11 +9,8 @@ go:
   - 1.5.1
 
 script:
-  - cd discount-go
-  - make test
-  - make build
-  - make docker
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - cd discount-go
   - make docker-push
   - cd ..
 
