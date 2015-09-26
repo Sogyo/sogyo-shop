@@ -17,5 +17,5 @@ run: build run-cached
 run-cached:
 	docker run --rm -it -p 8080:8080 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
 
-docker-push: build
+docker-push: docker
 	docker push $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})

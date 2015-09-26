@@ -11,10 +11,7 @@ go:
 script:
   - docker login -e="${DOCKER_EMAIL}" -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
   - docker -v
-  - cd ${TRAVIS_BUILD_DIR}/discount-go && make build && docker build -t sogyo/sogyo-shop-discount-go . && docker push sogyo/sogyo-shop-discount-go
-  - cd ${TRAVIS_BUILD_DIR}/discount-go && make docker-push
-  - cd ${TRAVIS_BUILD_DIR}/customer-java && make docker-push
-  - cd ${TRAVIS_BUILD_DIR} && make all
+  - make all
 
 env:
   global:
