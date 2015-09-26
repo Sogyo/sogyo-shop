@@ -11,8 +11,8 @@ go:
 script:
   - docker login -e="${DOCKER_EMAIL}" -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
   - docker -v
-  - cd discount-go && make docker-push && cd ..
-  - cd customer-java && make docker-push && cd ..
+  - cd ${TRAVIS_BUILD_DIR}/discount-go && make docker-push
+  - cd ${TRAVIS_BUILD_DIR}/customer-java && make docker-push
   - make all
 
 env:
