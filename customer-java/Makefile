@@ -5,10 +5,10 @@ SERVICE_TAG=latest
 default: test build
 
 test:
-	docker run --rm -v $(shell pwd):/source/ $(shell echo ${BUILD_IMAGE}) /bin/bash -c "cd /source/ && mvn verify"
+	mvn -B -q clean verify
 
 build: 
-	docker run --rm -v $(shell pwd):/source/ $(shell echo ${BUILD_IMAGE}) /bin/bash -c "cd /source/ && mvn package"
+	docker run --rm -v $(shell pwd):/source/ $(shell echo ${BUILD_IMAGE}) /bin/bash -c "cd /source/ && mvn -B -q package"
 
 docker: build
 	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) .
