@@ -8,6 +8,7 @@ import (
 )
 
 type Discount struct {
+	CustomerID string
 	Percentage uint64
 }
 
@@ -38,6 +39,7 @@ func DiscountHandler(response http.ResponseWriter, request *http.Request, uuid s
 	LogRequest(request, "DiscountHandler")
 
 	result := Discount{
+		CustomerID: strings.ToLower(uuid),
 		Percentage: CalculateDiscountPercentage(strings.ToLower(uuid)),
 	}
 
