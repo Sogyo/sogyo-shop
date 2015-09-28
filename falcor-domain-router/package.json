@@ -1,0 +1,21 @@
+{
+  "name": "falcor-domain-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bunyan": "^1.5.1",
+    "express": "^4.13.3",
+    "falcor-express": "^0.1.2",
+    "falcor-restify": "^1.1.1",
+    "falcor-router": "^0.2.9",
+    "restify": "^4.0.3",
+    "rx": "^4.0.0"
+  }
+}

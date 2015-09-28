@@ -1,0 +1,35 @@
+<!-- index.html -->
+<html>
+<head>
+    <!-- Do _not_  rely on this URL in production. Use only during development.  -->
+    <script src="https://netflix.github.io/falcor/build/falcor.browser.js"></script>
+    <script>
+        var model = new falcor.Model({source: new falcor.HttpDataSource('/model.json')});
+
+        var firstCustomer = "0f22b52a-a530-44b9-ac10-54dd35c6b49f";
+        var secondCustomer = "9a22b52a-a531-44b9-ff10-64dd35c6b49f";
+
+        // retrieve the "greeting" key from the root of the Virtual JSON resource
+        model.get(["discount", [firstCustomer, secondCustomer]])
+                .map(function (response) {
+                    return response.json.discount;
+                })
+                .subscribe(function (discount) {
+                    document.write("Discount for " + firstCustomer + " is " + discount[firstCustomer] + "%.");
+                    document.write("<br>");
+                    document.write("Discount for " + secondCustomer + " is " + discount[secondCustomer] + "%.");
+                });
+
+        model.get(["customer", firstCustomer, "discount"])
+                .map(function (response) {
+                    return response.json.customer;
+                })
+                .subscribe(function (customer) {
+                    console.log(customer);
+                    document.write(customer[firstCustomer].discount);
+                });
+    </script>
+</head>
+<body>
+</body>
+</html>

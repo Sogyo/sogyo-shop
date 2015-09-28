@@ -2,3 +2,4 @@
 **/*.iml
 **/target/*
 discount-go/discount-go
+falcor-domain-router/node_modules/*
