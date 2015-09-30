@@ -12,6 +12,7 @@
   "dependencies": {
     "bunyan": "^1.5.1",
     "express": "^4.13.3",
+    "falcor": "^0.1.13",
     "falcor-express": "^0.1.2",
     "falcor-restify": "^1.1.1",
     "falcor-router": "^0.2.9",

@@ -2,6 +2,7 @@ var rx = require('rx');
 var restify = require('restify');
 var bunyan = require('bunyan');
 var LOG = require('../logger.js');
+var falcor = require('falcor');
 
 var discountclient = restify.createJsonClient({
     url: 'http://localhost:8080',
@@ -13,12 +14,14 @@ var discountclient = restify.createJsonClient({
     version: '*'
 });
 
+var $atom = falcor.Model.atom;
+
 module.exports = [
     {
         route: "discount[{keys:uuid}]",
         get: function (pathSet) {
             return rx.Observable
-                .from(pathSet[1])
+                .from(pathSet.uuid)
                 .flatMap(function (uuid) {
                     return rx.Observable.create(function subscribe(observer) {
                         var subscribed = true;
@@ -31,7 +34,10 @@ module.exports = [
                                 if (err) {
                                     observer.onError(err);
                                 } else {
-                                    observer.onNext(obj);
+                                    observer.onNext({
+                                        request: uuid,
+                                        response: obj
+                                    });
                                     observer.onCompleted();
                                 }
                             });
@@ -41,44 +47,10 @@ module.exports = [
                         };
                     })
                 })
-                .map(function (discount) {
+                .map(function (request_response) {
                     return {
-                        path: ["discount", [discount.CustomerID]],
-                        value: discount.Percentage
-                    }
-                });
-        }
-    }, {
-        route: "customer[{keys:uuid}]['discount']",
-        get: function (pathSet) {
-            return rx.Observable
-                .from(pathSet[1])
-                .flatMap(function (uuid) {
-                    return rx.Observable.create(function subscribe(observer) {
-                        var subscribed = true;
-
-                        discountclient.get('/' + uuid,
-                            function (err, req, res, obj) {
-                                if (!subscribed) {
-                                    return;
-                                }
-                                if (err) {
-                                    observer.onError(err);
-                                } else {
-                                    observer.onNext(obj);
-                                    observer.onCompleted();
-                                }
-                            });
-
-                        return function dispose() {
-                            subscribed = false;
-                        };
-                    })
-                })
-                .map(function (discount) {
-                    return {
-                        path: ["customer", [discount.CustomerID], "discount"],
-                        value: discount.Percentage
+                        path: ["discount['" + request_response.request + "']"],
+                        value: request_response.response.percentage
                     }
                 });
         }
