@@ -12,7 +12,7 @@ build: test
 docker: build
 	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) .
 
-run: build run-cached
+run: docker run-cached
 
 run-cached:
 	docker run --rm -it -p 8080:8080 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
