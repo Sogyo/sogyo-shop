@@ -1,5 +1,6 @@
 var falcorExpress = require('falcor-express');
 var Router = require('falcor-router');
+var cors = require('cors');
 var logger = require('./logger.js');
 
 var express = require('express');
@@ -67,6 +68,8 @@ var model = new falcor.Model({
     }
 });
 */
+
+app.use(cors());
 
 app.use('/model.json', falcorExpress.dataSourceRoute(function (req, res) {
     //return model.asDataSource();

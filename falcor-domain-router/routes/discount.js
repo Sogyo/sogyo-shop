@@ -14,11 +14,9 @@ var discountclient = restify.createJsonClient({
     version: '*'
 });
 
-var $atom = falcor.Model.atom;
-
 module.exports = [
     {
-        route: "discount[{keys:uuid}]",
+        route: "discount[{keys:uuid}]['percentage']",
         get: function (pathSet) {
             return rx.Observable
                 .from(pathSet.uuid)
@@ -35,8 +33,8 @@ module.exports = [
                                     observer.onError(err);
                                 } else {
                                     observer.onNext({
-                                        request: uuid,
-                                        response: obj
+                                        uuid: uuid,
+                                        result: obj
                                     });
                                     observer.onCompleted();
                                 }
@@ -47,11 +45,13 @@ module.exports = [
                         };
                     })
                 })
-                .map(function (request_response) {
-                    return {
-                        path: ["discount['" + request_response.request + "']"],
-                        value: request_response.response.percentage
-                    }
+                .map(function (data) {
+                    var result = {
+                        path: ["discount", data.uuid, "percentage"],
+                        value: data.result.percentage
+                    };
+                    console.log(result);
+                    return result;
                 });
         }
     }

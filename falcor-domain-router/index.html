@@ -73,6 +73,7 @@
         //model.get("customer['0f22b52a-a530-44b9-ac10-54dd35c6b49f']")
                 .map(function(response) {
                     console.log(response.json.customer['0f22b52a-a530-44b9-ac10-54dd35c6b49f'].order[0]);
+                    console.log(response.json.customer['0f22b52a-a530-44b9-ac10-54dd35c6b49f'].order[0].discount);
                     return response.json;
                 })
                 .subscribe(function (json) {
