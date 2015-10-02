@@ -21,8 +21,7 @@ namespace discount.aspnet.test
 			var discount1 = discountctrl.Get("Test");
 			Assert.InRange(discount1, 0, 100);
 			discount1 = discountctrl.Get("Testsdfgdghfghs");
-			Assert.InRange(discount1, 0, 100);
-			
+			Assert.InRange(discount1, 0, 100);			
 		}
 	}
 }
