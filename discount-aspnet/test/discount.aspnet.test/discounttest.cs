@@ -12,6 +12,14 @@ namespace discount.aspnet.test
 			var discount1 = discountctrl.Get("Test");
 			var discount2 = discountctrl.Get("Test");
 			Assert.Equal(discount1, discount2);
+		}
+
+		[Fact]
+		public void ReproduceableDiscountTest()	{
+			var discountctrl = new DiscountController();
+			var discount1 = discountctrl.Get("Test");
+			var discount2 = discountctrl.Get("test");
+			Assert.Equal(discount1, discount2);
 		} 
 		
 		[Fact]

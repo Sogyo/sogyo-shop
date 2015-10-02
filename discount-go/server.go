@@ -8,22 +8,26 @@ import (
 )
 
 type Discount struct {
-	Percentage uint64
+	Percentage uint64 `json:"percentage"`
 }
 
 func main() {
-	http.HandleFunc("/discount/", MakeHandler(DiscountHandler))
+	http.HandleFunc("/", MakeHandler(DiscountHandler))
 	http.ListenAndServe(":8080", nil)
+}
+
+func LogRequest(request *http.Request, handler string) {
+	log.Printf("[%s] %s [%s]\n", request.Method, request.URL, handler)
 }
 
 func MakeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		splitted := strings.Split(r.URL.Path, "/")
-		if splitted == nil || len(splitted) < 3 {
+		if splitted == nil || len(splitted) < 2 {
 			http.NotFound(w, r)
 			return
 		}
-		fn(w, r, splitted[2])
+		fn(w, r, splitted[1])
 	}
 }
 
@@ -31,7 +35,7 @@ func DiscountHandler(response http.ResponseWriter, request *http.Request, uuid s
 	response.Header().Set("X-Server-Language", "go")
 	response.Header().Set("Content-Type", "application/json")
 
-	log.Println("/discount/ is hit.")
+	LogRequest(request, "DiscountHandler")
 
 	result := Discount{
 		Percentage: CalculateDiscountPercentage(strings.ToLower(uuid)),

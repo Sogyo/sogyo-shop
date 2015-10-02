@@ -9,7 +9,7 @@ import (
 func TestMakeSimpleRequest(t *testing.T) {
 	handler := MakeHandler(DiscountHandler)
 
-	req, _ := http.NewRequest("GET", "/discount/mystring", nil)
+	req, _ := http.NewRequest("GET", "/mystring", nil)
 
 	first := httptest.NewRecorder()
 	handler.ServeHTTP(first, req)
@@ -28,8 +28,8 @@ func TestMakeSimpleRequest(t *testing.T) {
 func TestDiscountEqualityCaseInsensitive(t *testing.T) {
 	handler := MakeHandler(DiscountHandler)
 
-	reqFirst, _ := http.NewRequest("GET", "/discount/mystring", nil)
-	reqSecond, _ := http.NewRequest("GET", "/discount/MyString", nil)
+	reqFirst, _ := http.NewRequest("GET", "/mystring", nil)
+	reqSecond, _ := http.NewRequest("GET", "/MyString", nil)
 
 	first := httptest.NewRecorder()
 	handler.ServeHTTP(first, reqFirst)
