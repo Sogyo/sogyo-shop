@@ -29,6 +29,22 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/customer', {
+        templateUrl: 'views/customer.html',
+        controller: 'CustomerCtrl'
+      })
+      .when('/customer/:uuid/details', {
+        templateUrl: 'views/customer_details.html',
+        controller: 'CustomerDetailsCtrl'
+      })
+      .when('/order', {
+        templateUrl: 'views/order.html',
+        controller: 'OrderCtrl'
+      })
+      .when('/order/:uuid/details', {
+        templateUrl: 'views/order_details.html',
+        controller: 'OrderDetailsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

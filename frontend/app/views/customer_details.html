@@ -1,0 +1,35 @@
+<div>
+  <p>Details of customer:</p>
+  <div class="container-fluid">
+    <div class="row">
+      <span class="col-md-3"><strong>UUID:</strong></span>
+      <span class="col-md-6">{{customer.uuid}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>First name:</strong></span>
+      <span class="col-md-6">{{customer.firstName}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Last name:</strong></span>
+      <span class="col-md-6">{{customer.lastName}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Email address:</strong></span>
+      <span class="col-md-6">{{customer.email}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Number of orders:</strong></span>
+      <span class="col-md-6">{{customer.orders.size}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Orders:</strong></span>
+      <span class="col-md-6">
+        <ul ng-repeat="order in orders">
+          <li>
+            <a href="#/order/{{order}}/details">{{order}}</a>
+          </li>
+        </ul>
+      </span>
+    </div>
+  </div>
+</div>

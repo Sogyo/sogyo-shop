@@ -1,0 +1,32 @@
+<div>
+  <p>Details of an order:</p>
+  <div class="container-fluid">
+    <div class="row">
+      <span class="col-md-3"><strong>UUID:</strong></span>
+      <span class="col-md-6">{{order.uuid}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Customer:</strong></span>
+      <span class="col-md-6"><a href="#/customer/{{order.customer.uuid}}/details">{{order.customer.uuid}}</a></span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Discount:</strong></span>
+      <span class="col-md-6">{{order.discountpercentage}} %</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Grand total:</strong></span>
+      <span class="col-md-6">{{order.total}}</span>
+    </div>
+    <div class="row">
+      <span class="col-md-3"><strong>Orderlines:</strong></span>
+      <span class="col-md-6">{{order.orderlines.size}}</span>
+    </div>
+    <div ng-repeat="line in orderlines" class="row">
+      <span class="col-md-1"></span>
+      <span class="col-md-1"><strong># {{line.line}}:</strong></span>
+      <span class="col-md-1"> {{line.product.price * line.amount}}</span>
+      <span class="col-md-1">{{line.amount}} x</span>
+      <span class="col-md-6"><a href="#/product/{{line.product.uuid}}/details">{{line.product.name}} - {{line.product.price}}</a></span>
+    </div>
+  </div>
+</div>
