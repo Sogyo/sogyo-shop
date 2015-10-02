@@ -13,11 +13,9 @@ public class CustomerRepositoryInMemory implements CustomerRepository {
   }
 
   static {
-    add(UUID.randomUUID(), "First", "Name", "first@name.ext");
-    add(UUID.randomUUID(), "Second", "Foo", "foo@bar.baz");
-    add(UUID.randomUUID(), "Third", "Bar", "a@b.c");
+    add(UUID.fromString("0f22b52a-a530-44b9-ac10-54dd35c6b49f"), "First", "Last", "first@last.ext");
+    add(UUID.fromString("9a22b52a-a531-44b9-ff10-64dd35c6b49f"), "foo", "bar", "foo@bar.baz");
   }
-
   @Override
   public Customer getByUUID(final UUID uuid) {
     return customers.get(uuid);
