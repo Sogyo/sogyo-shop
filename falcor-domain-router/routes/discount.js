@@ -16,7 +16,8 @@ var discountclient = restify.createJsonClient({
 
 module.exports = [
     {
-        route: "discount[{keys:uuid}]['percentage']",
+        route: "discount[{keys:uuid}]['percentagejohn s de bilt" +
+        "']",
         get: function (pathSet) {
             return rx.Observable
                 .from(pathSet.uuid)
