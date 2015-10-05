@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('frontendApp')
-  .controller('OrderCtrl', ['$scope', 'DomainModel', 'DataUtil', function ($scope, DomainModel, DataUtil) {
+  .controller('OrderCtrl', ['$scope', '$timeout', 'DomainModel', 'DataUtil', function ($scope, $timeout, DomainModel, DataUtil) {
     var model = DomainModel.model;
 
     $scope.orders = [];
@@ -21,8 +21,12 @@ angular.module('frontendApp')
               });
           })
       }).subscribe(function (uuid) {
-        $scope.orders.push(uuid);
+        $timeout(function() {
+          $scope.orders.push(uuid);
+          $scope.$apply();
+        });
       }, function (err) {
         console.error(err);
+      }, function () {
       });
   }]);

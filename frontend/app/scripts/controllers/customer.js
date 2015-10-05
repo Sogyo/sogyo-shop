@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('frontendApp')
-  .controller('CustomerCtrl', ['$scope', 'DomainModel', 'DataUtil', function ($scope, DomainModel, DataUtil) {
+  .controller('CustomerCtrl', ['$scope', '$timeout', 'DomainModel', 'DataUtil', function ($scope, $timeout, DomainModel, DataUtil) {
     var model = DomainModel.model;
 
     $scope.customers = [];
 
     model.getValue(
-      ["customer", "size"]
+      ["customers", "size"]
     ).flatMap(function (size) {
         return model
-          .get(["customer", "all", {from: 0, to: size - 1}, "uuid"])
+          .get(["customers", "all", {from: 0, to: size - 1}, "uuid"])
           .map(function (response) {
-            return response.json.customer.all;
+            return response.json.customers.all;
           })
           .flatMap(function (all) {
             return DataUtil.extractModelProperties(all)
@@ -21,8 +21,12 @@ angular.module('frontendApp')
               });
           })
       }).subscribe(function (uuid) {
-        $scope.customers.push(uuid);
+        $timeout(function() {
+          $scope.customers.push(uuid);
+          $scope.$apply();
+        });
       }, function (err) {
         console.error(err);
+      }, function () {
       });
   }]);

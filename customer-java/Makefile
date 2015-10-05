@@ -16,7 +16,7 @@ docker: build
 run: docker run-cached
 
 run-cached:
-	docker run --rm -it -p 9000:9000 -p 9001:9001 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
+	docker run --rm -it -p 4000:9000 -p 4001:9001 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
 
 docker-push: docker
 	docker push $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})

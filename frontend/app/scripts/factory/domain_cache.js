@@ -4,16 +4,19 @@ angular.module('frontendApp')
   .factory('DomainCache', ['falcor', function (falcor) {
     var $ref = falcor.Model.ref;
 
-    /** Complete offline cache **/
-    return {
+    var offline = false;
+
+    var model = {
       cache: {
         // customer service
-        customer: {
+        customers: {
           size: 2,
           all: [
             $ref("customer['0f22b52a-a530-44b9-ac10-54dd35c6b49f']"),
             $ref("customer['9a22b52a-a531-44b9-ff10-64dd35c6b49f']")
-          ],
+          ]
+        },
+        customer: {
           "0f22b52a-a530-44b9-ac10-54dd35c6b49f": {
             uuid: "0f22b52a-a530-44b9-ac10-54dd35c6b49f",
             firstName: "First",
@@ -88,4 +91,11 @@ angular.module('frontendApp')
         }
       }
     };
+
+    if(! offline) {
+      delete model.cache.discount;
+      delete model.cache.customer;
+    }
+
+    return model;
   }]);
