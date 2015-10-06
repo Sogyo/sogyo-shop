@@ -3,13 +3,16 @@ SERVICE_TAG=latest
 
 default: test build
 
-test:
-	echo TODO
+test: build-test
+	docker run --rm -it $(shell echo ${SERVICE_IMAGE}):Test
+	
+build-test:
+	docker build -t $(shell echo ${SERVICE_IMAGE}):Test .
 
 build:
-	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) .
+	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) src/discount.aspnet
 
-docker: build
+docker: test build
 
 run: docker run-cached
 

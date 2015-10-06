@@ -1,8 +1,9 @@
 {
 	"dependencies": {
-		"discount.aspnet":"1.0.0-*",
+		"discount.aspnet":"",
 		"xunit":"2.1.0-*",
-		"xunit.runner.dnx": "2.1.0-*"
+		"xunit.runner.dnx": "2.1.0-*",
+		"Newtonsoft.Json": "7.0.1"
 	},
 	"frameworks": {
     	"dnx451": {},
