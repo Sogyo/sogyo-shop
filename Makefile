@@ -2,9 +2,9 @@ export
 
 default: build
 
-build: discount-go-build customer-java-build frontend-angular-build # discount-aspnet-build
+build: discount-go-build customer-java-build frontend-angular-build discount-aspnet-build
 
-publish: discount-go-publish customer-java-publish frontend-angular-publish # discount-aspnet-publish
+publish: discount-go-publish customer-java-publish frontend-angular-publish discount-aspnet-publish
 
 discount-go-build:
 	${MAKE} -C discount-go docker
