@@ -2,9 +2,9 @@ export
 
 default: build
 
-build: discount-go-build customer-java-build frontend-angular-build discount-aspnet-build
+build: discount-go-build customer-java-build domain-graph-falcor-build frontend-angular-build discount-aspnet-build
 
-publish: discount-go-publish customer-java-publish frontend-angular-publish discount-aspnet-publish
+publish: discount-go-publish customer-java-publish domain-graph-falcor-publish frontend-angular-publish discount-aspnet-publish
 
 discount-go-build:
 	${MAKE} -C discount-go docker
@@ -18,12 +18,18 @@ customer-java-build:
 customer-java-publish:
 	${MAKE} -C customer-java docker-push
 
+domain-graph-falcor-build:
+	${MAKE} -C domain-graph-falcor docker
+
+domain-graph-falcor-publish:
+	${MAKE} -C domain-graph-falcor docker-push
+
 discount-aspnet-build:
 	${MAKE} -C discount-aspnet/src/discount.aspnet docker
 
 discount-aspnet-publish:
 	${MAKE} -C discount-aspnet/src/discount.aspnet docker-push
-	
+
 frontend-angular-build:
 	${MAKE} -C frontend-angular docker
 
@@ -31,4 +37,4 @@ frontend-angular-publish:
 	${MAKE} -C frontend-angular docker-push
 
 
-.PHONY: all discount-go-build discount-go-publish customer-java-build discount-go-publish frontend-angular-build frontend-angular-publish
+.PHONY: all discount-go-build discount-go-publish customer-java-build discount-go-publish frontend-angular-build frontend-angular-publish domain-graph-falcor-build domain-graph-falcor-publish
