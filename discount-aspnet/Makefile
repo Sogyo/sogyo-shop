@@ -12,7 +12,7 @@ build-test:
 build:
 	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) src/discount.aspnet
 
-docker: build
+docker: test build
 
 run: docker run-cached
 
