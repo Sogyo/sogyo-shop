@@ -19,10 +19,10 @@ customer-java-publish:
 	${MAKE} -C customer-java docker-push
 
 discount-aspnet-build:
-	${MAKE} -C discount-aspnet\src\discount.aspnet docker
+	${MAKE} -C discount-aspnet/src/discount.aspnet docker
 
 discount-aspnet-publish:
-	${MAKE} -C discount-aspnet\src\discount.aspnet docker-push
+	${MAKE} -C discount-aspnet/src/discount.aspnet docker-push
 	
 frontend-angular-build:
 	${MAKE} -C frontend-angular docker
