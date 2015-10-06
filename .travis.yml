@@ -11,7 +11,7 @@ go:
 script:
   - docker login -e="${DOCKER_EMAIL}" -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
   - docker -v
-  - make all
+  - make publish
 
 env:
   global:

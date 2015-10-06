@@ -1,16 +1,28 @@
 export
 
-default: all
+default: build
 
-all: discount-go customer-java frontend-angular
+build: discount-go-build customer-java-build frontend-angular-build
 
-discount-go:
+publish: discount-go-publish customer-java-publish frontend-angular-publish
+
+discount-go-build:
+	${MAKE} -C discount-go docker
+
+discount-go-publish:
 	${MAKE} -C discount-go docker-push
 
-customer-java:
+customer-java-build:
+	${MAKE} -C customer-java docker
+
+customer-java-publish:
 	${MAKE} -C customer-java docker-push
 
-frontend-angular:
+frontend-angular-build:
+	${MAKE} -C frontend-angular docker
+
+frontend-angular-publish:
 	${MAKE} -C frontend-angular docker-push
 
-.PHONY: all discount-go customer-java frontend-angular
+
+.PHONY: all discount-go-build discount-go-publish customer-java-build discount-go-publish frontend-angular-build frontend-angular-publish
