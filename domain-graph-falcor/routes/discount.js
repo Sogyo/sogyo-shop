@@ -5,7 +5,7 @@ var LOG = require('../logger.js');
 var falcor = require('falcor');
 
 var discountclient = restify.createJsonClient({
-    url: 'http://10.10.2.135:8080',
+    url: 'http://10.199.1.12',
     log: LOG.child({
         component: 'server',
         level: bunyan.INFO,
