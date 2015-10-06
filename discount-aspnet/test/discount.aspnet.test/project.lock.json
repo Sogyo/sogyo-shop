@@ -8,10 +8,10 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -370,32 +370,6 @@
           "lib/dnx451/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -744,13 +718,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -1145,24 +1112,6 @@
           "lib/dnx451/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
         }
       },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        }
-      },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
         "type": "package",
         "dependencies": {
@@ -1482,11 +1431,11 @@
           "lib/net45/_._": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -1498,7 +1447,7 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "compile": {
           "lib/dotnet/xunit.assert.dll": {}
@@ -1507,14 +1456,14 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -1528,10 +1477,10 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.execution.dotnet.dll": {}
@@ -1540,14 +1489,14 @@
           "lib/dnx451/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -1563,11 +1512,11 @@
           "lib/dnx451/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
@@ -1576,7 +1525,7 @@
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -1595,10 +1544,10 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -1918,35 +1867,6 @@
           "lib/dnxcore50/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
-          "System.Diagnostics.Process": "4.0.0-beta-23302",
-          "System.Net.NetworkInformation": "4.0.10-beta-23123",
-          "System.Reflection.Extensions": "4.0.1-beta-23302",
-          "System.Security.Principal.Windows": "4.0.0-beta-23302",
-          "System.Text.Encoding": "4.0.11-beta-23302",
-          "System.Text.Encoding.Extensions": "4.0.11-beta-23302",
-          "System.Threading": "4.0.11-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -2215,13 +2135,6 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -2603,18 +2516,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
-        }
-      },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
         }
       },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
@@ -3130,11 +3031,11 @@
           "lib/DNXCore50/System.Diagnostics.Debug.dll": {}
         }
       },
-      "System.Diagnostics.Process/4.0.0-beta-23302": {
+      "System.Diagnostics.Process/4.0.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Primitives": "4.0.0",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
+          "Microsoft.Win32.Registry": "4.0.0-beta-23225",
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
           "System.Globalization": "4.0.10",
@@ -3146,12 +3047,13 @@
           "System.Runtime.Extensions": "4.0.10",
           "System.Runtime.Handles": "4.0.0",
           "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.SecureString": "4.0.0-beta-23225",
           "System.Text.Encoding": "4.0.10",
           "System.Text.Encoding.Extensions": "4.0.10",
           "System.Threading": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
-          "System.Threading.Thread": "4.0.0-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
+          "System.Threading.Thread": "4.0.0-beta-23225",
+          "System.Threading.ThreadPool": "4.0.10-beta-23225"
         },
         "compile": {
           "ref/dotnet/System.Diagnostics.Process.dll": {}
@@ -3457,18 +3359,6 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Net.Http.dll": {}
-        }
-      },
-      "System.Net.NetworkInformation/4.0.10-beta-23123": {
-        "type": "package",
-        "dependencies": {
-          "System.Private.Networking": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet/System.Net.NetworkInformation.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Net.NetworkInformation.dll": {}
         }
       },
       "System.Net.Primitives/4.0.11-beta-23302": {
@@ -4163,11 +4053,11 @@
           "lib/dotnet/System.Xml.XDocument.dll": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -4179,7 +4069,7 @@
           "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -4201,7 +4091,7 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -4214,11 +4104,11 @@
           "System.Runtime.Extensions": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -4232,7 +4122,7 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -4249,7 +4139,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.execution.dotnet.dll": {}
@@ -4258,15 +4148,15 @@
           "lib/dotnet/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
           "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23225",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "compile": {
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
@@ -4275,7 +4165,7 @@
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
@@ -4291,7 +4181,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
@@ -4300,7 +4190,7 @@
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -4331,10 +4221,10 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -4693,32 +4583,6 @@
           "lib/dnx451/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -5067,13 +4931,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -5468,24 +5325,6 @@
           "lib/dnx451/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
         }
       },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        }
-      },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
         "type": "package",
         "dependencies": {
@@ -5805,11 +5644,11 @@
           "lib/net45/_._": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -5821,7 +5660,7 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "compile": {
           "lib/dotnet/xunit.assert.dll": {}
@@ -5830,14 +5669,14 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -5851,10 +5690,10 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.execution.dotnet.dll": {}
@@ -5863,14 +5702,14 @@
           "lib/dnx451/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -5886,11 +5725,11 @@
           "lib/dnx451/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
@@ -5899,7 +5738,7 @@
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -5918,10 +5757,10 @@
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -6280,32 +6119,6 @@
           "lib/dnx451/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -6654,13 +6467,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -7055,24 +6861,6 @@
           "lib/dnx451/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
         }
       },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
-        }
-      },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
         "type": "package",
         "dependencies": {
@@ -7392,11 +7180,11 @@
           "lib/net45/_._": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -7408,7 +7196,7 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "compile": {
           "lib/dotnet/xunit.assert.dll": {}
@@ -7417,14 +7205,14 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -7438,10 +7226,10 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.execution.dotnet.dll": {}
@@ -7450,14 +7238,14 @@
           "lib/dnx451/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -7473,11 +7261,11 @@
           "lib/dnx451/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
@@ -7486,7 +7274,7 @@
           "lib/dnx451/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -7505,10 +7293,10 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -7828,35 +7616,6 @@
           "lib/dnxcore50/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
-          "System.Diagnostics.Process": "4.0.0-beta-23302",
-          "System.Net.NetworkInformation": "4.0.10-beta-23123",
-          "System.Reflection.Extensions": "4.0.1-beta-23302",
-          "System.Security.Principal.Windows": "4.0.0-beta-23302",
-          "System.Text.Encoding": "4.0.11-beta-23302",
-          "System.Text.Encoding.Extensions": "4.0.11-beta-23302",
-          "System.Threading": "4.0.11-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -8125,13 +7884,6 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -8513,18 +8265,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
-        }
-      },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
         }
       },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
@@ -9040,11 +8780,11 @@
           "lib/DNXCore50/System.Diagnostics.Debug.dll": {}
         }
       },
-      "System.Diagnostics.Process/4.0.0-beta-23302": {
+      "System.Diagnostics.Process/4.0.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Primitives": "4.0.0",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
+          "Microsoft.Win32.Registry": "4.0.0-beta-23225",
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
           "System.Globalization": "4.0.10",
@@ -9056,12 +8796,13 @@
           "System.Runtime.Extensions": "4.0.10",
           "System.Runtime.Handles": "4.0.0",
           "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.SecureString": "4.0.0-beta-23225",
           "System.Text.Encoding": "4.0.10",
           "System.Text.Encoding.Extensions": "4.0.10",
           "System.Threading": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
-          "System.Threading.Thread": "4.0.0-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
+          "System.Threading.Thread": "4.0.0-beta-23225",
+          "System.Threading.ThreadPool": "4.0.10-beta-23225"
         },
         "compile": {
           "ref/dotnet/System.Diagnostics.Process.dll": {}
@@ -9367,18 +9108,6 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Net.Http.dll": {}
-        }
-      },
-      "System.Net.NetworkInformation/4.0.10-beta-23123": {
-        "type": "package",
-        "dependencies": {
-          "System.Private.Networking": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet/System.Net.NetworkInformation.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Net.NetworkInformation.dll": {}
         }
       },
       "System.Net.Primitives/4.0.11-beta-23302": {
@@ -10073,11 +9802,11 @@
           "lib/dotnet/System.Xml.XDocument.dll": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -10089,7 +9818,7 @@
           "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -10111,7 +9840,7 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -10124,11 +9853,11 @@
           "System.Runtime.Extensions": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -10142,7 +9871,7 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -10159,7 +9888,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.execution.dotnet.dll": {}
@@ -10168,15 +9897,15 @@
           "lib/dotnet/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
           "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23225",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "compile": {
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
@@ -10185,7 +9914,7 @@
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
@@ -10201,7 +9930,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
@@ -10210,7 +9939,7 @@
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -10241,10 +9970,10 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Mvc": "6.0.0",
-          "Microsoft.AspNet.Server.IIS": "1.0.0",
           "Microsoft.AspNet.Server.Kestrel": "1.0.0",
           "Microsoft.AspNet.Server.WebListener": "1.0.0",
-          "Microsoft.AspNet.StaticFiles": "1.0.0"
+          "Microsoft.AspNet.StaticFiles": "1.0.0",
+          "Newtonsoft.Json": "7.0.1"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-beta8-15621": {
@@ -10564,35 +10293,6 @@
           "lib/dnxcore50/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
-      "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta8-15576",
-          "Microsoft.AspNet.Hosting": "1.0.0-beta8-15618",
-          "Microsoft.Dnx.Compilation.Abstractions": "1.0.0-beta8-15618",
-          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8-15586",
-          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta8-15586",
-          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta8-15589",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
-          "System.Diagnostics.Process": "4.0.0-beta-23302",
-          "System.Net.NetworkInformation": "4.0.10-beta-23123",
-          "System.Reflection.Extensions": "4.0.1-beta-23302",
-          "System.Security.Principal.Windows": "4.0.0-beta-23302",
-          "System.Text.Encoding": "4.0.11-beta-23302",
-          "System.Text.Encoding.Extensions": "4.0.11-beta-23302",
-          "System.Threading": "4.0.11-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-        "type": "package"
-      },
       "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
         "type": "package",
         "dependencies": {
@@ -10861,13 +10561,6 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.AspNet.Routing.dll": {}
-        }
-      },
-      "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Loader.IIS": "1.0.0-beta8-15609",
-          "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta8-15609"
         }
       },
       "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -11249,18 +10942,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Framework.Configuration.EnvironmentVariables.dll": {}
-        }
-      },
-      "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Framework.Configuration": "1.0.0-beta8-15586"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll": {}
         }
       },
       "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
@@ -11776,11 +11457,11 @@
           "lib/DNXCore50/System.Diagnostics.Debug.dll": {}
         }
       },
-      "System.Diagnostics.Process/4.0.0-beta-23302": {
+      "System.Diagnostics.Process/4.0.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Primitives": "4.0.0",
-          "Microsoft.Win32.Registry": "4.0.0-beta-23302",
+          "Microsoft.Win32.Registry": "4.0.0-beta-23225",
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
           "System.Globalization": "4.0.10",
@@ -11792,12 +11473,13 @@
           "System.Runtime.Extensions": "4.0.10",
           "System.Runtime.Handles": "4.0.0",
           "System.Runtime.InteropServices": "4.0.20",
+          "System.Security.SecureString": "4.0.0-beta-23225",
           "System.Text.Encoding": "4.0.10",
           "System.Text.Encoding.Extensions": "4.0.10",
           "System.Threading": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
-          "System.Threading.Thread": "4.0.0-beta-23302",
-          "System.Threading.ThreadPool": "4.0.10-beta-23302"
+          "System.Threading.Thread": "4.0.0-beta-23225",
+          "System.Threading.ThreadPool": "4.0.10-beta-23225"
         },
         "compile": {
           "ref/dotnet/System.Diagnostics.Process.dll": {}
@@ -12103,18 +11785,6 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Net.Http.dll": {}
-        }
-      },
-      "System.Net.NetworkInformation/4.0.10-beta-23123": {
-        "type": "package",
-        "dependencies": {
-          "System.Private.Networking": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet/System.Net.NetworkInformation.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Net.NetworkInformation.dll": {}
         }
       },
       "System.Net.Primitives/4.0.11-beta-23302": {
@@ -12809,11 +12479,11 @@
           "lib/dotnet/System.Xml.XDocument.dll": {}
         }
       },
-      "xunit/2.1.0-rc2-build3176": {
+      "xunit/2.1.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.1.0-rc2-build3176]",
-          "xunit.core": "[2.1.0-rc2-build3176]"
+          "xunit.assert": "[2.1.0]",
+          "xunit.core": "[2.1.0]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -12825,7 +12495,7 @@
           "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-rc2-build3176": {
+      "xunit.assert/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -12847,7 +12517,7 @@
           "lib/dotnet/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-rc2-build3176": {
+      "xunit.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -12860,11 +12530,11 @@
           "System.Runtime.Extensions": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]",
-          "xunit.extensibility.execution": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]",
+          "xunit.extensibility.execution": "[2.1.0]"
         }
       },
-      "xunit.extensibility.core/2.1.0-rc2-build3176": {
+      "xunit.extensibility.core/2.1.0": {
         "type": "package",
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
@@ -12878,7 +12548,7 @@
           "lib/dotnet/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+      "xunit.extensibility.execution/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -12895,7 +12565,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.extensibility.core": "[2.1.0-rc2-build3176]"
+          "xunit.extensibility.core": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.execution.dotnet.dll": {}
@@ -12904,15 +12574,15 @@
           "lib/dotnet/xunit.execution.dotnet.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta5-build169": {
+      "xunit.runner.dnx/2.1.0-beta5a-build188": {
         "type": "package",
         "dependencies": {
           "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
           "Microsoft.Dnx.TestAdapter": "1.0.0-beta7",
           "Microsoft.Dnx.TestHost": "1.0.0-beta7",
           "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23225",
-          "xunit.runner.reporters": "2.1.0-rc1-build3168",
-          "xunit.runner.utility": "2.1.0-rc1-build3168"
+          "xunit.runner.reporters": "2.1.0",
+          "xunit.runner.utility": "2.1.0"
         },
         "compile": {
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
@@ -12921,7 +12591,7 @@
           "lib/dnxcore50/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.reporters/2.1.0-rc1-build3168": {
+      "xunit.runner.reporters/2.1.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
@@ -12937,7 +12607,7 @@
           "System.Threading": "4.0.0",
           "System.Threading.Tasks": "4.0.0",
           "xunit.abstractions": "2.0.0",
-          "xunit.runner.utility": "[2.1.0-rc1-build3168]"
+          "xunit.runner.utility": "[2.1.0]"
         },
         "compile": {
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
@@ -12946,7 +12616,7 @@
           "lib/dotnet/xunit.runner.reporters.dotnet.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-rc1-build3168": {
+      "xunit.runner.utility/2.1.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -13241,33 +12911,6 @@
         "Microsoft.AspNet.JsonPatch.nuspec"
       ]
     },
-    "Microsoft.AspNet.Loader.IIS/1.0.0-beta8-15609": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "DechUBKA8zTybIZH6iw42h4oovY0i/RwERnmHG3Tno1IHK8qDAtjRfZYHw8ZFhEf6dGVXbDmaYHyyR7UXXpxYg==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll",
-        "lib/dnx451/Microsoft.AspNet.Loader.IIS.xml",
-        "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll",
-        "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.xml",
-        "Microsoft.AspNet.Loader.IIS.1.0.0-beta8-15609.nupkg",
-        "Microsoft.AspNet.Loader.IIS.1.0.0-beta8-15609.nupkg.sha512",
-        "Microsoft.AspNet.Loader.IIS.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta8-15609": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "hXhZOlz8bOO6lKJdGBwgpatEJnVvS7mzCgY30S18mxuCWN0Hckl5zRQ7sfdrRIAIbWNnBGe+r93QKbXwHRnSkA==",
-      "files": [
-        "InteropAssemblies/amd64/Microsoft.AspNet.Loader.IIS.Interop.dll",
-        "InteropAssemblies/x86/Microsoft.AspNet.Loader.IIS.Interop.dll",
-        "Microsoft.AspNet.Loader.IIS.Interop.1.0.0-beta8-15609.nupkg",
-        "Microsoft.AspNet.Loader.IIS.Interop.1.0.0-beta8-15609.nupkg.sha512",
-        "Microsoft.AspNet.Loader.IIS.Interop.nuspec",
-        "tools/AspNet.Loader.dll"
-      ]
-    },
     "Microsoft.AspNet.Localization/1.0.0-beta8-15628": {
       "type": "package",
       "serviceable": true,
@@ -13510,15 +13153,6 @@
         "Microsoft.AspNet.Routing.1.0.0-beta8-15623.nupkg",
         "Microsoft.AspNet.Routing.1.0.0-beta8-15623.nupkg.sha512",
         "Microsoft.AspNet.Routing.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.Server.IIS/1.0.0-beta8-15609": {
-      "type": "package",
-      "sha512": "XpIO+gJq7e++o9UhuWjGIFstL4yTkgUVSSWMr9lpjAFpmVAdAgLhfybLHhH4wI/Y2N2wehXsxEjB8KaNv52R7Q==",
-      "files": [
-        "Microsoft.AspNet.Server.IIS.1.0.0-beta8-15609.nupkg",
-        "Microsoft.AspNet.Server.IIS.1.0.0-beta8-15609.nupkg.sha512",
-        "Microsoft.AspNet.Server.IIS.nuspec"
       ]
     },
     "Microsoft.AspNet.Server.Kestrel/1.0.0-beta8-15622": {
@@ -13880,22 +13514,6 @@
         "Microsoft.Framework.Configuration.EnvironmentVariables.1.0.0-beta8-15586.nupkg",
         "Microsoft.Framework.Configuration.EnvironmentVariables.1.0.0-beta8-15586.nupkg.sha512",
         "Microsoft.Framework.Configuration.EnvironmentVariables.nuspec"
-      ]
-    },
-    "Microsoft.Framework.Configuration.Ini/1.0.0-beta8-15586": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "aSUkoaZTc3dmKqUAoErBUDefs6ybDxCYirSScuUq4ghHWPEg3GLrPuV0eCy7E3h0rqCyxbtRiPz3UaDzivr01Q==",
-      "files": [
-        "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll",
-        "lib/dnx451/Microsoft.Framework.Configuration.Ini.xml",
-        "lib/dotnet/Microsoft.Framework.Configuration.Ini.dll",
-        "lib/dotnet/Microsoft.Framework.Configuration.Ini.xml",
-        "lib/net45/Microsoft.Framework.Configuration.Ini.dll",
-        "lib/net45/Microsoft.Framework.Configuration.Ini.xml",
-        "Microsoft.Framework.Configuration.Ini.1.0.0-beta8-15586.nupkg",
-        "Microsoft.Framework.Configuration.Ini.1.0.0-beta8-15586.nupkg.sha512",
-        "Microsoft.Framework.Configuration.Ini.nuspec"
       ]
     },
     "Microsoft.Framework.Configuration.Json/1.0.0-beta8-15586": {
@@ -14503,10 +14121,10 @@
         "System.Diagnostics.Debug.nuspec"
       ]
     },
-    "System.Diagnostics.Process/4.0.0-beta-23302": {
+    "System.Diagnostics.Process/4.0.0-beta-23225": {
       "type": "package",
       "serviceable": true,
-      "sha512": "FtflxzCJUdgw+4suLaWz82EOLxVa7X6DWbY4eSRIomDlMwYrsof8Ewz81XhKMWY0EOY/5Nx+r/oPTbFUECAiUg==",
+      "sha512": "Pt6QAiXPNKIobDWHcNqX/wz6+YaTqqxw7f245sX1lz4rZxCmGwlUI0yhV/fXXvT7iPJRDLXSEXTnS3F8GsxK9g==",
       "files": [
         "lib/DNXCore50/System.Diagnostics.Process.dll",
         "lib/MonoAndroid10/_._",
@@ -14520,8 +14138,8 @@
         "ref/net46/System.Diagnostics.Process.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
-        "System.Diagnostics.Process.4.0.0-beta-23302.nupkg",
-        "System.Diagnostics.Process.4.0.0-beta-23302.nupkg.sha512",
+        "System.Diagnostics.Process.4.0.0-beta-23225.nupkg",
+        "System.Diagnostics.Process.4.0.0-beta-23225.nupkg.sha512",
         "System.Diagnostics.Process.nuspec"
       ]
     },
@@ -14929,37 +14547,6 @@
         "System.Net.Http.4.0.0.nupkg",
         "System.Net.Http.4.0.0.nupkg.sha512",
         "System.Net.Http.nuspec"
-      ]
-    },
-    "System.Net.NetworkInformation/4.0.10-beta-23123": {
-      "type": "package",
-      "sha512": "NkKpsUm2MLoxT+YlSwexidAw2jGFIJuc6i4H9pT3nU3TQj7MZVursD/ohWj3nyBxthy7i00XLWkRZAwGao/zsg==",
-      "files": [
-        "lib/DNXCore50/System.Net.NetworkInformation.dll",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "ref/dotnet/de/System.Net.NetworkInformation.xml",
-        "ref/dotnet/es/System.Net.NetworkInformation.xml",
-        "ref/dotnet/fr/System.Net.NetworkInformation.xml",
-        "ref/dotnet/it/System.Net.NetworkInformation.xml",
-        "ref/dotnet/ja/System.Net.NetworkInformation.xml",
-        "ref/dotnet/ko/System.Net.NetworkInformation.xml",
-        "ref/dotnet/ru/System.Net.NetworkInformation.xml",
-        "ref/dotnet/System.Net.NetworkInformation.dll",
-        "ref/dotnet/System.Net.NetworkInformation.xml",
-        "ref/dotnet/zh-hans/System.Net.NetworkInformation.xml",
-        "ref/dotnet/zh-hant/System.Net.NetworkInformation.xml",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "System.Net.NetworkInformation.4.0.10-beta-23123.nupkg",
-        "System.Net.NetworkInformation.4.0.10-beta-23123.nupkg.sha512",
-        "System.Net.NetworkInformation.nuspec"
       ]
     },
     "System.Net.Primitives/4.0.11-beta-23302": {
@@ -16026,12 +15613,12 @@
         "System.Xml.XDocument.nuspec"
       ]
     },
-    "xunit/2.1.0-rc2-build3176": {
+    "xunit/2.1.0": {
       "type": "package",
-      "sha512": "VDTmsLhIbHt0G3b2Izb2v3nHF/WeoCdv8m57RIBNzm/UCNHcJ8ucwFbaFnlD3TtHNE4kc7jDtCiJSux2LNAT6w==",
+      "sha512": "u/7VQSOSXa7kSG4iK6Lcn7RqKZQ3hk7cnyMNVMpXHSP0RI5VQEtc44hvkG3LyWOVsx1dhUDD3rPAHAxyOUDQJw==",
       "files": [
-        "xunit.2.1.0-rc2-build3176.nupkg",
-        "xunit.2.1.0-rc2-build3176.nupkg.sha512",
+        "xunit.2.1.0.nupkg",
+        "xunit.2.1.0.nupkg.sha512",
         "xunit.nuspec"
       ]
     },
@@ -16048,9 +15635,9 @@
         "xunit.abstractions.nuspec"
       ]
     },
-    "xunit.assert/2.1.0-rc2-build3176": {
+    "xunit.assert/2.1.0": {
       "type": "package",
-      "sha512": "D93fToGBKvUfOadAICF9QMu6rbKeMmEmk/stxRFjvVK7q9MKokZRBboG5JlSFKWGxsR9C3KaI0bBRY7Pmb61mQ==",
+      "sha512": "Hhhw+YaTe+BGhbr57dxVE+6VJk8BfThqFFii1XIsSZ4qx+SSCixprJC10JkiLRVSTfWyT8W/4nAf6NQgIrmBxA==",
       "files": [
         "lib/dotnet/xunit.assert.dll",
         "lib/dotnet/xunit.assert.pdb",
@@ -16058,14 +15645,14 @@
         "lib/portable-net45+win8+wp8+wpa81/xunit.assert.dll",
         "lib/portable-net45+win8+wp8+wpa81/xunit.assert.pdb",
         "lib/portable-net45+win8+wp8+wpa81/xunit.assert.xml",
-        "xunit.assert.2.1.0-rc2-build3176.nupkg",
-        "xunit.assert.2.1.0-rc2-build3176.nupkg.sha512",
+        "xunit.assert.2.1.0.nupkg",
+        "xunit.assert.2.1.0.nupkg.sha512",
         "xunit.assert.nuspec"
       ]
     },
-    "xunit.core/2.1.0-rc2-build3176": {
+    "xunit.core/2.1.0": {
       "type": "package",
-      "sha512": "CCU5hm7qAzox4vdXbs8uEwGyTnEQ0lJGGj9OhvkawJmIjtPLvinrMgF1bamd39soJ+zUROY42sQxG16a/fdzcQ==",
+      "sha512": "jlbYdPbnkPIRwJllcT/tQZCNsSElVDEymdpJfH79uTUrPARkELVYw9o/zhAjKZXmeikGqGK5C2Yny4gTNoEu0Q==",
       "files": [
         "build/_desktop/xunit.execution.desktop.dll",
         "build/dnx451/_._",
@@ -16078,14 +15665,14 @@
         "build/wp8/_._",
         "build/wpa81/xunit.core.props",
         "build/xamarinios/_._",
-        "xunit.core.2.1.0-rc2-build3176.nupkg",
-        "xunit.core.2.1.0-rc2-build3176.nupkg.sha512",
+        "xunit.core.2.1.0.nupkg",
+        "xunit.core.2.1.0.nupkg.sha512",
         "xunit.core.nuspec"
       ]
     },
-    "xunit.extensibility.core/2.1.0-rc2-build3176": {
+    "xunit.extensibility.core/2.1.0": {
       "type": "package",
-      "sha512": "u2Xo5H67JvpJ21DGbPc5yJptN4fJXtbHXr/Dn2dFGSjxScecA2lZ0dRlBJac4DQymWXhYSXnet+9pWIPtV/wnA==",
+      "sha512": "ANWM3WxeaeHjACLRlmrv+xOc0WAcr3cvIiJE+gqbdzTv1NCH4p1VDyT+8WmmdCc9db0WFiJLaDy4YTYsL1wWXw==",
       "files": [
         "lib/dotnet/xunit.core.dll",
         "lib/dotnet/xunit.core.dll.tdnet",
@@ -16099,14 +15686,14 @@
         "lib/portable-net45+win8+wp8+wpa81/xunit.core.xml",
         "lib/portable-net45+win8+wp8+wpa81/xunit.runner.tdnet.dll",
         "lib/portable-net45+win8+wp8+wpa81/xunit.runner.utility.desktop.dll",
-        "xunit.extensibility.core.2.1.0-rc2-build3176.nupkg",
-        "xunit.extensibility.core.2.1.0-rc2-build3176.nupkg.sha512",
+        "xunit.extensibility.core.2.1.0.nupkg",
+        "xunit.extensibility.core.2.1.0.nupkg.sha512",
         "xunit.extensibility.core.nuspec"
       ]
     },
-    "xunit.extensibility.execution/2.1.0-rc2-build3176": {
+    "xunit.extensibility.execution/2.1.0": {
       "type": "package",
-      "sha512": "DA+lmoANhlBTdbEH9WUHtI1vfqAPUaS7BdzwihCUDkgUrHDjqLHaXDwjEpiLVocZJOosU6wbL0wf+aTRObDEjA==",
+      "sha512": "tAoNafoVknKa3sZJPMvtZRnhOSk3gasEGeceSm7w/gyGwsR/OXFxndWJB1xSHeoy33d3Z6jFqn4A3j+pWCF0Ew==",
       "files": [
         "lib/dnx451/xunit.execution.dotnet.dll",
         "lib/dnx451/xunit.execution.dotnet.pdb",
@@ -16138,40 +15725,40 @@
         "lib/xamarinios/xunit.execution.dotnet.dll",
         "lib/xamarinios/xunit.execution.dotnet.pdb",
         "lib/xamarinios/xunit.execution.dotnet.xml",
-        "xunit.extensibility.execution.2.1.0-rc2-build3176.nupkg",
-        "xunit.extensibility.execution.2.1.0-rc2-build3176.nupkg.sha512",
+        "xunit.extensibility.execution.2.1.0.nupkg",
+        "xunit.extensibility.execution.2.1.0.nupkg.sha512",
         "xunit.extensibility.execution.nuspec"
       ]
     },
-    "xunit.runner.dnx/2.1.0-beta5-build169": {
+    "xunit.runner.dnx/2.1.0-beta5a-build188": {
       "type": "package",
-      "sha512": "E5cYXk8/6Vrai9Zq8TMnYaXPbC3SWO0JsjN3X+S276lkVKISiSEWXN2ICd6VsDPuJFz0TN7lZdylU0GPxve24A==",
+      "sha512": "m48yZLJhQZm+o7EMbF1XhWhhcrqnVHvjoJJZivJTAjKheIFMY2DpQI7wL/HJx+bOlqlKJrJKlYwsrNH/taWRVg==",
       "files": [
         "lib/dnx451/xunit.runner.dnx.dll",
         "lib/dnx451/xunit.runner.dnx.xml",
         "lib/dnxcore50/xunit.runner.dnx.dll",
         "lib/dnxcore50/xunit.runner.dnx.xml",
         "repo.json",
-        "xunit.runner.dnx.2.1.0-beta5-build169.nupkg",
-        "xunit.runner.dnx.2.1.0-beta5-build169.nupkg.sha512",
+        "xunit.runner.dnx.2.1.0-beta5a-build188.nupkg",
+        "xunit.runner.dnx.2.1.0-beta5a-build188.nupkg.sha512",
         "xunit.runner.dnx.nuspec"
       ]
     },
-    "xunit.runner.reporters/2.1.0-rc1-build3168": {
+    "xunit.runner.reporters/2.1.0": {
       "type": "package",
-      "sha512": "jvshOBaWng7Y3xtI3FenHPDGzLUZFnvJOczIOGwfsLKgbXc/e9+1YmDfuh4I4H4zrs7Kp4rKBaXboe9ER7CFOQ==",
+      "sha512": "ja0kJrvwSiho2TRFpfHfa+6tGJI5edcyD8fdekTkjn7Us17PbGqglIihRe8sR9YFAmS4ipEC8+7CXOM/b69ENQ==",
       "files": [
         "lib/dnx451/xunit.runner.reporters.dotnet.dll",
         "lib/dotnet/xunit.runner.reporters.dotnet.dll",
         "lib/net45/xunit.runner.reporters.desktop.dll",
-        "xunit.runner.reporters.2.1.0-rc1-build3168.nupkg",
-        "xunit.runner.reporters.2.1.0-rc1-build3168.nupkg.sha512",
+        "xunit.runner.reporters.2.1.0.nupkg",
+        "xunit.runner.reporters.2.1.0.nupkg.sha512",
         "xunit.runner.reporters.nuspec"
       ]
     },
-    "xunit.runner.utility/2.1.0-rc1-build3168": {
+    "xunit.runner.utility/2.1.0": {
       "type": "package",
-      "sha512": "4raBhWPr7w8eQa+Rc1eYCVC5sTJeovtuJwj59OqCHUTpSyaTT/9rps2eI+mXRSD7uH46TS2o0IoQ3bsSsrcedQ==",
+      "sha512": "jJJHROwskIhdQuYw7exe7KaW20dOCa+lzV/lY7Zdh1ZZzdUPpScMi9ReJIutqiyjhemGF8V/GaMIPrcjyZ4ioQ==",
       "files": [
         "lib/dnx451/xunit.runner.utility.dotnet.dll",
         "lib/dnx451/xunit.runner.utility.dotnet.pdb",
@@ -16185,17 +15772,18 @@
         "lib/portable-net45+win8+wp8+wpa81/xunit.runner.utility.dotnet.dll",
         "lib/portable-net45+win8+wp8+wpa81/xunit.runner.utility.dotnet.pdb",
         "lib/portable-net45+win8+wp8+wpa81/xunit.runner.utility.dotnet.xml",
-        "xunit.runner.utility.2.1.0-rc1-build3168.nupkg",
-        "xunit.runner.utility.2.1.0-rc1-build3168.nupkg.sha512",
+        "xunit.runner.utility.2.1.0.nupkg",
+        "xunit.runner.utility.2.1.0.nupkg.sha512",
         "xunit.runner.utility.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "discount.aspnet >= 1.0.0-*",
+      "discount.aspnet ",
       "xunit >= 2.1.0-*",
-      "xunit.runner.dnx >= 2.1.0-*"
+      "xunit.runner.dnx >= 2.1.0-*",
+      "Newtonsoft.Json >= 7.0.1"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
