@@ -8,7 +8,7 @@ test:
 	echo "Todo"
 
 build:
-	docker run --rm -v $(shell pwd):/source/ $(shell echo ${BUILD_IMAGE}) /bin/bash -c "cd /source && npm install --quiet -g grunt-cli bower && npm install --quiet && bower install --quiet&& grunt build"
+	docker run --rm -v $(shell pwd):/source/ $(shell echo ${BUILD_IMAGE}) /bin/bash -c "cd /source && npm install --quiet -g grunt-cli bower && npm install --quiet && bower install --allow-root --quiet && grunt build"
 
 docker: build
 	docker build -t $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG}) .
