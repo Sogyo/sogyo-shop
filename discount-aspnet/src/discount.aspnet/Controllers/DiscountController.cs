@@ -6,10 +6,10 @@ using Microsoft.AspNet.Mvc;
 
 namespace discount.aspnet.Controllers
 {
-    [Route("[controller]")]
+    [Route("")]
     public class DiscountController : Controller
     {
-        // GET discount/5
+        // GET 5
         [HttpGet("{id}")]
         public string Get(string id)
         {
