@@ -91,6 +91,19 @@ function specific(spec) {
         });
 }
 
+var ordercache = {
+    "0f22b52a-a530-44b9-ac10-54dd35c6b49f": {
+        "size": 1,
+        "all": [
+            $ref("order['285e56ff-9499-46bd-90d9-fa23e717f376']")
+        ]
+    },
+    "9a22b52a-a531-44b9-ff10-64dd35c6b49f": {
+        "size": 0,
+        "all": []
+    }
+};
+
 module.exports = [
     {
         route: "customer[{keys:opts}]['uuid', 'firstName', 'lastName', 'email']",
@@ -102,6 +115,7 @@ module.exports = [
                     return specific(opt);
                 })
                 .map(function (data) {
+                    data.result.orders = ordercache[data.result.uuid];
                     var result = {
                         path: ["customer", data.query],
                         value: data.result

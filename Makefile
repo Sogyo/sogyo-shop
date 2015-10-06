@@ -2,7 +2,7 @@ export
 
 default: all
 
-all: discount-go customer-java 
+all: discount-go customer-java frontend-angular
 
 discount-go:
 	${MAKE} -C discount-go docker-push
@@ -10,4 +10,7 @@ discount-go:
 customer-java:
 	${MAKE} -C customer-java docker-push
 
-.PHONY: all discount-go customer-java
+frontend-angular:
+	${MAKE} -C frontend-angular docker-push
+
+.PHONY: all discount-go customer-java frontend-angular
