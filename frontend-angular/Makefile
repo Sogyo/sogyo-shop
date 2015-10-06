@@ -1,5 +1,5 @@
 BUILD_IMAGE=node
-SERVICE_IMAGE=sogyo/sogyo-shop-frontend
+SERVICE_IMAGE=sogyo/sogyo-shop-frontend-angular
 SERVICE_TAG=latest
 
 default: test build
@@ -16,7 +16,7 @@ docker: build
 run: docker run-cached
 
 run-cached:
-	docker run --rm -it -p 9000:9000 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
+	docker run --rm -it -p 9000:80 $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
 
 docker-push: docker
 	docker push $(shell echo ${SERVICE_IMAGE}):$(shell echo ${SERVICE_TAG})
