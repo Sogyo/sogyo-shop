@@ -12,5 +12,5 @@ angular.module('frontendApp')
 
 angular.module('frontendApp')
   .factory('falcor-domain-model-router', [function () {
-    return "http://10.199.1.13/model.json";
+    return "http://10.199.1.14/model.json";
   }]);
