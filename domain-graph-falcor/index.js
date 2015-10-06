@@ -16,6 +16,12 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function (req, res) {
     return new Router(routes);
 }));
 
+process.on('SIGINT', function() {
+    logger.info("Caught interrupt signal");
+
+    process.exit();
+});
+
 var server = app.listen(3000, function (err) {
     logger.error(err);
 });

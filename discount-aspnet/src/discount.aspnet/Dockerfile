@@ -1,4 +1,4 @@
-FROM microsoft/aspnet:1.0.0-beta7-coreclr
+FROM microsoft/aspnet
 
 COPY project.json /app/
 WORKDIR /app
