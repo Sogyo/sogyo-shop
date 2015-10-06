@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 using Microsoft.AspNet.Mvc;
 
 namespace discount.aspnet.Controllers
@@ -9,9 +11,9 @@ namespace discount.aspnet.Controllers
     {
         // GET discount/5
         [HttpGet("{id}")]
-        public int Get(string id)
+        public string Get(string id)
         {
-            return id.GetHashCode() % 100;       
+            return JsonConvert.SerializeObject(new {percentage =( (uint)id.GetHashCode()) % 100});       
         }
     }
 }
