@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sogyo-shop-discount-go
+  labels:
+    app: discount-go
+    type: discount
+spec:
+  containers:
+  - name: sogyo-shop-discount-go
+    image: sogyo/sogyo/sogyo-shop-discount-go
+    ports:
+    - containerPort: 8080
+    

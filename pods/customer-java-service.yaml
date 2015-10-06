@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-java-service
+type: LoadBalancer
+spec:
+  ports:
+  - port: 80
+    name: service
+    targetPort: 9000
+    protocol: TCP
+  - port: 81
+    name: maintenance
+    targetPort: 9001
+    protocol: TCP
+  selector:
+    app: customer-java
+  ClusterIP: 10.199.1.13

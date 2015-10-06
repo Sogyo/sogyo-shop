@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: sogyo-shop-falcor-domain-router-controller
+spec:
+  replicas: 2
+  selector:
+    app: falcor-domain-router
+  template:
+    metadata:
+      labels:
+        app: falcor-domain-router
+    spec:
+      containers:
+      - name: falcor-domain-router
+        image: sogyo/sogyo-shop-falcor-domain-router
+        ports:
+        - containerPort: 3000

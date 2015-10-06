@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: sogyo-shop-customer-java-controller
+spec:
+  replicas: 2
+  selector:
+    app: customer-java
+  template:
+    metadata:
+      labels:
+        app: customer-java
+    spec:
+      containers:
+      - name: sogyo-shop-customer-java
+        image: sogyo/sogyo-shop-customer-java
+        ports:
+        - containerPort: 9000
+        - containerPort: 9001

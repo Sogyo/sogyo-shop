@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: falcor-domain-service
+type: LoadBalancer
+spec:
+  ports:
+  - port: 80
+    name: service
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: falcor-domain-router
+  ClusterIP: 10.199.1.14
