@@ -9,5 +9,5 @@ spec:
     command:
       - sleep
       - "600"
-    name: busybox
+    name: config-feeder
   restartPolicy: Always
