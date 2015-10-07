@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: discount-go-service
+  labels:
+    app: discount-go
 type: LoadBalancer
 spec:
   ports:
