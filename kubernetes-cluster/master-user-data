@@ -56,6 +56,8 @@ coreos:
         ExecStart=/usr/bin/chmod +x /opt/bin/kubectl
         ExecStartPre=/usr/bin/wget -P /opt/bin ${BASEURL}/kube-apiserver
         ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-apiserver
+        ExecStartPre=/usr/bin/wget -P /opt/bin ${BASEURL}/kube-proxy
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-proxy
         ExecStartPre=/usr/bin/wget -P /opt/bin ${BASEURL}/kube-controller-manager
         ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-controller-manager
         ExecStartPre=/usr/bin/wget -P /opt/bin ${BASEURL}/kube-scheduler
@@ -119,7 +121,6 @@ coreos:
         Description=Kubernetes master
         After=docker.service download-kubectl.service
         [Service]
-        #ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-apiserver --service-cluster-ip-range=10.199.1.0/24 --insecure-bind-address=$COREOS_PRIVATE_IPV4 --etcd-servers=http://$COREOS_PRIVATE_IPV4:2379 --v=2 --cluster-name=kubernetes)"
         ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-apiserver --service-cluster-ip-range=10.199.1.0/24 --insecure-bind-address=0.0.0.0 --etcd-servers=http://$COREOS_PRIVATE_IPV4:2379 --v=2 --cluster-name=kubernetes)"
         Restart=always
         RestartSec=30
