@@ -2,7 +2,9 @@ require 'fileutils'
 require 'open-uri'
 require 'yaml'
 
-USER_DATA = File.join(File.dirname(__FILE__), "user-data")
+USER_DATA_TEMPLATE = File.join(File.dirname(__FILE__), "user-data")
+USER_DATA = USER_DATA_TEMPLATE + "-tmpfile"
+FileUtils.cp(USER_DATA_TEMPLATE, USER_DATA)
 
 $new_discovery_url='https://discovery.etcd.io/new?size=3'
 

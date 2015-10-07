@@ -2,9 +2,17 @@ require 'fileutils'
 require 'open-uri'
 require 'yaml'
 
-SLAVE_USER_DATA = File.join(File.dirname(__FILE__), "slave-user-data")
-MASTER_USER_DATA = File.join(File.dirname(__FILE__), "master-user-data")
-ROUTER_USER_DATA = File.join(File.dirname(__FILE__), "router-user-data")
+MASTER_USER_DATA_TEMPLATE = File.join(File.dirname(__FILE__), "master-user-data")
+MASTER_USER_DATA = MASTER_USER_DATA_TEMPLATE + "-tmpfile"
+FileUtils.cp(MASTER_USER_DATA_TEMPLATE, MASTER_USER_DATA)
+
+SLAVE_USER_DATA_TEMPLATE = File.join(File.dirname(__FILE__), "slave-user-data")
+SLAVE_USER_DATA = SLAVE_USER_DATA_TEMPLATE + "-tmpfile"
+FileUtils.cp(SLAVE_USER_DATA_TEMPLATE, SLAVE_USER_DATA)
+
+ROUTER_USER_DATA_TEMPLATE = File.join(File.dirname(__FILE__), "router-user-data")
+ROUTER_USER_DATA = ROUTER_USER_DATA_TEMPLATE + "-tmpfile"
+FileUtils.cp(ROUTER_USER_DATA_TEMPLATE, ROUTER_USER_DATA)
 
 $coreos_release = "stable"
 $coreos_version = "766.4.0"

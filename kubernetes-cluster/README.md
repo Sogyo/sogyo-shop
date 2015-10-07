@@ -6,6 +6,7 @@ Simple, single master setup.
 vagrant up
 ip route add 10.199.1.0/24 via 10.199.0.254 # 34 is the router
 ip route del 10.199.1.0/24
+kubectl -s 10.199.0.30:8080 cluster-info
 ```
 
 # Verify cloud init:
