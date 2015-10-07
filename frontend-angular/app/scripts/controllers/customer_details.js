@@ -34,8 +34,8 @@ angular.module('frontendApp')
             .extractModelProperties(all)
             .map(function(property) {
               return all[property].uuid;
-          })
-        })
+          });
+        });
     }).subscribe(function (uuid) {
         $timeout(function() {
           $scope.orders.push(uuid);

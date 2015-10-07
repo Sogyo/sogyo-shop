@@ -19,7 +19,7 @@ angular.module('frontendApp')
               .map(function (index) {
                 return all[index].uuid;
               });
-          })
+          });
       }).subscribe(function (uuid) {
         $timeout(function() {
           $scope.customers.push(uuid);

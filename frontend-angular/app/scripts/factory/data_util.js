@@ -13,7 +13,7 @@ angular.module('frontendApp')
             }
           }
           observer.onCompleted();
-        })
+        });
       }
-    }
+    };
   }]);
