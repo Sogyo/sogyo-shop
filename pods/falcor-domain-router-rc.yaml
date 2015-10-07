@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: sogyo-shop-falcor-domain-router-controller
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     app: falcor-domain-router
   template:
