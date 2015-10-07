@@ -144,7 +144,6 @@ coreos:
         Description=Kubernetes Scheduler
         Requires=kubernetes-master-api.service download-kubectl.service
         After=kubernetes-master-api.service download-kubectl.service
-
         [Service]
         ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-scheduler --master=127.0.0.1:8080)"
         Restart=always

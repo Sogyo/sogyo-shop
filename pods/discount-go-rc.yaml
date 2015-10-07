@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: sogyo-shop-discount-go-controller
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     app: discount-go
   template:

@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: sogyo-shop-frontend-angular-controller
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     app: frontend-angular
   template:
