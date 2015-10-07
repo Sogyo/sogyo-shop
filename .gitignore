@@ -12,3 +12,4 @@ consul-cluster/user-data-tmpfile
 kubernetes-cluster/master-user-data-tmpfile
 kubernetes-cluster/slave-user-data-tmpfile
 kubernetes-cluster/router-user-data-tmpfile
+kubernetes-cluster/mirror/kube*
