@@ -1,0 +1,95 @@
+#cloud-config
+
+---
+write-files:
+  - path: /etc/conf.d/nfs
+    permissions: '0644'
+    content: |
+      OPTS_RPC_MOUNTD=""
+  - path: /opt/bin/kube-master-location
+    permissions: '755'
+    content: |
+      #!/bin/bash
+      MASTER=$(curl --silent http://localhost:8500/v1/catalog/service/kubernetes-master-apiserver | jq -r '.[0] | "\(."ServiceAddress"):\(."ServicePort")"')
+      if [ -z "$MASTER" ]; then
+        echo "No master found."
+        exit 1
+      fi
+      empty="null:null"
+      if [ "$empty" == "$MASTER" ]; then
+        echo "No master found."
+        exit 2
+      fi
+      echo $MASTER
+      exit 0
+users:
+- name: kevin
+  groups:
+  - sudo
+  - docker
+  ssh-authorized-keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtSuEiGn1W/HRpyY9ys6qNWprtAMpdSdTiUpqHAjDQY+A58y9O0Nhi7TM4XkeIkONObXxVwgOEKScvIyNJlYihODbsuAETV6GfjkkeOgxNAnCVEDZZLy09HBTE9RmxAtBUTLSSoCIT71U6vXUqRgo1ruWAfIrFlCwxeKgzJewvCFT0wg7UOKpn5b2c63Ysa8JOWFieQf5HoueCf9wuzuTxQAI8/yxV4CnFJ/+e2tpCjdDOCKG6xNxpC/xywRG2/moiZAE4t1S4V2sdPA8/a4IlDbQUGMOmOqtuiNuUwrBcB6p4g/YKyLQ3jtrs0Eyhma4qU7VQLDH8JfELtvDLEPSv
+coreos:
+  update:
+    group: alpha
+    reboot-strategy: off
+  etcd2:
+    proxy: on
+    advertise-client-urls: http://0.0.0.0:2379
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://0.0.0.0:2380,http://0.0.0.0:7001
+    initial-cluster: master01=http://10.199.0.11:2380,master02=http://10.199.0.12:2380,master03=http://10.199.0.13:2380
+    initial-cluster-state: "existing"
+  fleet:
+    metadata: "role=node"
+  flannel:
+    interface: $public_ipv4
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: flanneld.service
+      command: start
+    - name: download-kubernetes.service
+      command: start
+      content: |
+        [Unit]
+        Description=Download kubernetes
+        Requires=network-online.target
+        After=network-online.target
+        [Service]
+        ExecStartPre=-/usr/bin/mkdir -p /opt/bin
+        ExecStartPre=/usr/bin/wget -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kubectl
+        ExecStart=/usr/bin/chmod +x /opt/bin/kubectl
+        ExecStartPre=/usr/bin/curl -L -o /opt/bin/kube-proxy -z /opt/bin/kube-proxy https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kube-proxy
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-proxy
+        Type=oneshot
+    - name: consul-client.service
+      command: start
+      content: |
+        [Unit]
+        Description=Consul client service agent
+        After=docker.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=1m
+        ExecStartPre=-/usr/bin/docker kill consul
+        ExecStartPre=-/usr/bin/docker rm consul
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /usr/bin/docker run --log-driver=syslog --name consul --restart=always -e SERVICE_IGNORE=true -p 8300:8300 -p 8301:8301 -p 8301:8301/udp -p 8302:8302 -p 8302:8302/udp -p 8400:8400 -p 8500:8500 -h $(hostname) --dns $(cat /etc/resolv.conf | grep nameserver | awk -F' ' '{ print $2 }') progrium/consul -join 10.199.0.11 -advertise $COREOS_PRIVATE_IPV4)"
+        ExecStop=/usr/bin/docker stop consul
+        SyslogIdentifier=consul
+    - name: kubernetes-proxy-service.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes proxy service
+        Requires=docker.service download-kubernetes.service
+        After=docker.service download-kubernetes.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=1m
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; MASTER=$(/opt/bin/kube-master-location) && /opt/bin/kube-proxy --master=$MASTER --v=2)" 
+        SyslogIdentifier=kubernetes-proxy-service

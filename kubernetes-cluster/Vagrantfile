@@ -1,0 +1,65 @@
+require 'fileutils'
+require 'open-uri'
+require 'yaml'
+
+SLAVE_USER_DATA = File.join(File.dirname(__FILE__), "slave-user-data")
+MASTER_USER_DATA = File.join(File.dirname(__FILE__), "master-user-data")
+ROUTER_USER_DATA = File.join(File.dirname(__FILE__), "router-user-data")
+
+$coreos_release = "stable"
+$coreos_version = "766.4.0"
+$instance_cpu_cnt = 1
+$instance_memory = 1024
+$master_name_prefix = "kubernetes-master"
+$slave_name_prefix = "kubernetes-slave"
+$router_name_prefix = "kubernetes-router"
+$ip_range = "10.199.0."
+# Port forwarding. guest => host + i
+$forwarded_ports = {}
+
+def build_machine(config, name, cnt, user_data)
+  config.vm.define vm_name = name do |config|
+
+    config.vm.hostname = name
+    
+    config.vm.provider "virtualbox" do |vb|
+      # Display the VirtualBox GUI when booting the machine
+      vb.gui = false
+  
+      # Customize the amount of memory on the VM:
+      vb.memory = $instance_memory
+      vb.cpus = $instance_cpu_cnt
+      vb.check_guest_additions = false
+      vb.functional_vboxsf = false
+    end
+
+    ip = "#{$ip_range}#{30+cnt}"
+    config.vm.network :private_network, ip: ip
+
+    $forwarded_ports.each do |guest, _host|
+      host = _host + cnt
+      config.vm.network "forwarded_port", guest: guest, host: host, auto_correct: true
+    end
+
+    if File.exist?(user_data)
+      config.vm.provision :file, :source => "#{user_data}", :destination => "/tmp/vagrantfile-user-data"
+      config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
+    end
+  end
+end
+
+# Set
+Vagrant.configure(2) do |config|
+  config.vm.box = "coreos-%s" % $coreos_release
+  config.vm.box_check_update = true
+  config.vm.box_version = ">= %s" % $coreos_version
+  config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $coreos_release
+
+  # Create three machines that will act as the actual cluster
+  build_machine(config, "%s-coreos-01" % $master_name_prefix, 0, "#{MASTER_USER_DATA}")
+  build_machine(config, "%s-coreos-01" % $slave_name_prefix, 1, "#{SLAVE_USER_DATA}")
+  build_machine(config, "%s-coreos-02" % $slave_name_prefix, 2, "#{SLAVE_USER_DATA}")
+  build_machine(config, "%s-coreos-03" % $slave_name_prefix, 3, "#{SLAVE_USER_DATA}")
+  # Router should be 30 + 224 = 254
+  build_machine(config, "%s-coreos-01" % $router_name_prefix, 224, "#{ROUTER_USER_DATA}")
+end

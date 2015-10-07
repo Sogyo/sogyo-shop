@@ -1,0 +1,162 @@
+#cloud-config
+
+---
+write-files:
+  - path: /etc/conf.d/nfs
+    permissions: '0644'
+    content: |
+      OPTS_RPC_MOUNTD=""
+  - path: /opt/bin/announce-master
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -e
+      curl -XPUT -d '{"Datacenter": "dc1", "Node": "kubernetes-master-coreos-01", "Address": "10.199.0.30", "Service": {"ID": "kubernetes-master-apiserver", "Service": "kubernetes-master-apiserver", "Tags": ["master", "apiserver"], "Address": "10.199.0.30", "Port": 8080 }}' localhost:8500/v1/catalog/register
+      curl -XPUT -d '{"ID": "kubernetes-master-apiserver-check-health", "Name": "APIServer status", "Notes": "Check apiserver state", "HTTP": "http://10.199.0.30:8080/healthz", "Interval": "15s"}' localhost:8500/v1/agent/check/register
+      curl -XPUT -d '{"ID": "kubernetes-master-apiserver-check-version", "Name": "Kubernetes version", "Notes": "Check kubernetes master version", "HTTP": "http://10.199.0.30:8080/version", "Interval": "15s"}' localhost:8500/v1/agent/check/register
+users:
+- name: kevin
+  groups:
+  - sudo
+  - docker
+  ssh-authorized-keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtSuEiGn1W/HRpyY9ys6qNWprtAMpdSdTiUpqHAjDQY+A58y9O0Nhi7TM4XkeIkONObXxVwgOEKScvIyNJlYihODbsuAETV6GfjkkeOgxNAnCVEDZZLy09HBTE9RmxAtBUTLSSoCIT71U6vXUqRgo1ruWAfIrFlCwxeKgzJewvCFT0wg7UOKpn5b2c63Ysa8JOWFieQf5HoueCf9wuzuTxQAI8/yxV4CnFJ/+e2tpCjdDOCKG6xNxpC/xywRG2/moiZAE4t1S4V2sdPA8/a4IlDbQUGMOmOqtuiNuUwrBcB6p4g/YKyLQ3jtrs0Eyhma4qU7VQLDH8JfELtvDLEPSv
+coreos:
+  update:
+    group: alpha
+    reboot-strategy: off
+  etcd2:
+    proxy: on
+    advertise-client-urls: http://0.0.0.0:2379
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://0.0.0.0:2380,http://0.0.0.0:7001
+    initial-cluster: master01=http://10.199.0.11:2380,master02=http://10.199.0.12:2380,master03=http://10.199.0.13:2380
+    initial-cluster-state: "existing"
+  fleet:
+    metadata: "role=node"
+  flannel:
+    interface: $public_ipv4
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: download-kubectl.service
+      command: start
+      content: |
+        [Unit]
+        Description=Download kubectl
+        Requires=network-online.target
+        After=network-online.target
+        [Service]
+        ExecStartPre=-/usr/bin/mkdir -p /opt/bin
+        ExecStartPre=/usr/bin/wget -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kubectl
+        ExecStart=/usr/bin/chmod +x /opt/bin/kubectl
+        ExecStartPre=/usr/bin/curl -L -o /opt/bin/kube-apiserver -z /opt/bin/kube-apiserver https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kube-apiserver
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-apiserver
+        ExecStartPre=/usr/bin/curl -L -o /opt/bin/kube-controller-manager -z /opt/bin/kube-controller-manager https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kube-controller-manager
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-controller-manager
+        ExecStartPre=/usr/bin/curl -L -o /opt/bin/kube-scheduler -z /opt/bin/kube-scheduler https://storage.googleapis.com/kubernetes-release/release/v1.0.1/bin/linux/amd64/kube-scheduler
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-scheduler
+        Type=oneshot
+    - name: flanneld.service
+      command: start
+      drop-ins:
+        - name: 50-network-config.conf
+          content: |
+            [Unit]
+            Requires=etcd2.service
+            [Service]
+            ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.244.0.0/16", "Backend": {"Type": "vxlan"}}'
+    - name: consul-client.service
+      command: start
+      content: |
+        [Unit]
+        Description=Consul client service agent
+        After=docker.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=1m
+        ExecStartPre=-/usr/bin/docker kill consul
+        ExecStartPre=-/usr/bin/docker rm consul
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /usr/bin/docker run --log-driver=syslog --name consul --restart=always -e SERVICE_IGNORE=true -p 8300:8300 -p 8301:8301 -p 8301:8301/udp -p 8302:8302 -p 8302:8302/udp -p 8400:8400 -p 8500:8500 -h $(hostname) --dns $(cat /etc/resolv.conf | grep nameserver | awk -F' ' '{ print $2 }') progrium/consul -join 10.199.0.11 -advertise $COREOS_PRIVATE_IPV4)"
+        ExecStop=/usr/bin/docker stop consul
+        SyslogIdentifier=consul
+    - name: register-kubernetes-master-service.service
+      command: start
+      content: |
+        [Unit]
+        Description=Announce kubernetes master
+        After=consul-client.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=2m
+        ExecStart=/opt/bin/announce-master
+        SyslogIdentifier=announce-master
+    - name: registrator.service
+      command: start
+      content: |
+        [Unit]
+        Description=Registrator
+        After=docker.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=1m
+        ExecStartPre=-/usr/bin/docker kill registrator
+        ExecStartPre=-/usr/bin/docker rm registrator
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /usr/bin/docker run --log-driver=syslog --name registrator --restart=always -v /var/run/docker.sock:/tmp/docker.sock -h $(hostname) --log-driver=syslog gliderlabs/registrator consul://$COREOS_PRIVATE_IPV4:8500)"
+        ExecStop=/usr/bin/docker stop registrator
+        SyslogIdentifier=registrator
+    - name: kubernetes-master-api.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes master
+        After=docker.service download-kubectl.service
+        [Service]
+        #ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-apiserver --service-cluster-ip-range=10.199.1.0/24 --insecure-bind-address=$COREOS_PRIVATE_IPV4 --etcd-servers=http://$COREOS_PRIVATE_IPV4:2379 --v=2 --cluster-name=kubernetes)"
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-apiserver --service-cluster-ip-range=10.199.1.0/24 --insecure-bind-address=0.0.0.0 --etcd-servers=http://$COREOS_PRIVATE_IPV4:2379 --v=2 --cluster-name=kubernetes)"
+        Restart=always
+        RestartSec=30
+        SyslogIdentifier=kubernetes-master-api
+    - name: kube-controller-manager.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes controller manager
+        Requires=kubernetes-master-api.service download-kubectl.service
+        After=kubernetes-master-api.service download-kubectl.service
+        [Service]
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-controller-manager --master=127.0.0.1:8080 --pod_eviction_timeout=30s --logtostderr=true)"
+        Restart=always
+        RestartSec=10
+        SyslogIdentifier=kubernetes-controller-manager
+    - name: kube-scheduler.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes Scheduler
+        Requires=kubernetes-master-api.service download-kubectl.service
+        After=kubernetes-master-api.service download-kubectl.service
+
+        [Service]
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-scheduler --master=127.0.0.1:8080)"
+        Restart=always
+        RestartSec=10
+        SyslogIdentifier=kubernetes-master-scheduler
+    - name: kubernetes-proxy-service.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes proxy service
+        Requires=kubernetes-master-api.service download-kubectl.service
+        After=kubernetes-master-api.service download-kubectl.service
+        [Service]
+        Restart=always
+        RestartSec=30
+        TimeoutStartSec=1m
+        ExecStart=/bin/sh -c "eval $(. /etc/environment; /opt/bin/kube-proxy --master=127.0.0.1:8080 --v=2)" 
+        SyslogIdentifier=kubernetes-proxy-service
