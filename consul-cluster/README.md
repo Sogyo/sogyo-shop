@@ -1,5 +1,7 @@
 # What do I do with this?
 
+This will create an Etcd and Consul cluster of three machines.
+
 ```
 vagrant up
 ```
