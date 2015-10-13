@@ -10,3 +10,8 @@
 
 # Using the cluster.
 A sample project has been created and is built in several frameworks and languages. A container is created for each of them. You can check out the 'pods' folder to see the definitions of those files as well as how to spin up the application. The angular web UI can eventually be reached at ```10.199.1.15```
+
+# Interesting
+* [Container ecosystem](https://www.mindmeister.com/389671722/docker-ecosystem)
+* [Architectural patterns of resilient distributed systems](https://github.com/Randommood/Strangeloop2015)
+* [Making The Case For Building Scalable Stateful Services In The Modern Era](http://highscalability.com/blog/2015/10/12/making-the-case-for-building-scalable-stateful-services-in-t.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+HighScalability+%28High+Scalability%29)
